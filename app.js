@@ -10,6 +10,11 @@ app.get("/", function(req,res){
     res.sendFile(__dirname + "/index.html");
 })
 
+app.post("/", function(req,res){
+    console.log("User InputD Data: ", req.body.fname, req.body.lname, req.body.email);
+    res.sendFile(__dirname + "/index.html");
+});
+
 app.listen(port,function(){
     console.log(`Server is running on port ${port}`);
 })
