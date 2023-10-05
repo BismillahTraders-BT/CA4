@@ -1,19 +1,14 @@
-# Use the official MongoDB image as the base image
-FROM mongo:latest
+# Use an official MySQL image as the base image
+FROM mysql:latest
 
-# Optionally, set environment variables for MongoDB configuration
- ENV MONGO_INITDB_ROOT_USERNAME=myuser
- ENV MONGO_INITDB_ROOT_PASSWORD=mypassword
+# Environment variables for database configuration
+ENV MYSQL_DATABASE=mlops
+ENV MYSQL_ROOT_PASSWORD=root
 
-# Copy your MongoDB configuration files, if needed
-# COPY mongod.conf /etc/mongod.conf
+# Copy the initialization SQL script to a directory in the container
+COPY init.sql /docker-entrypoint-initdb.d/
 
-# Expose the default MongoDB port (27017) if necessary
- EXPOSE 27017
+# Expose MySQL default port (3306)
+EXPOSE 3306
 
-# Define a custom entrypoint script if needed
-# COPY entrypoint.sh /docker-entrypoint-initdb.d/
-# RUN chmod +x /docker-entrypoint-initdb.d/entrypoint.sh
 
-# Start MongoDB when the container starts
-CMD ["mongod"]
