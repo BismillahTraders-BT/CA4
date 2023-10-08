@@ -21,6 +21,6 @@ jobs:
           DOCKER_IMAGE_NAME: bismillahtraders/ca4
           DOCKER_BUILD_CONTEXT: ./  
         run: |
-          docker build -t $DOCKER_IMAGE_NAME $DOCKER_BUILD_CONTEXT
+          docker build -t $DOCKER_IMAGE_NAME -f dockerfile.app $DOCKER_BUILD_CONTEXT
           docker push $DOCKER_IMAGE_NAME
 
