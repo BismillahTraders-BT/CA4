@@ -1,0 +1,25 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - i200699
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and push Docker image
+        env:
+          DOCKER_IMAGE_NAME: bismillahtraders/ca4db
+          DOCKER_BUILD_CONTEXT: ./  
+        run: |
+          docker build -t $DOCKER_IMAGE_NAME $DOCKER_BUILD_CONTEXT
+          docker push $DOCKER_IMAGE_NAME
